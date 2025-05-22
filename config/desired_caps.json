@@ -1,0 +1,8 @@
+{
+  "platformName": "Android",
+  "deviceName": "Android Emulator",
+  "platformVersion": "11.0",
+  "automationName": "UiAutomator2",
+  "app": "apks/ApiDemos-debug.apk",
+  "autoGrantPermissions": true
+}
