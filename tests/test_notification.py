@@ -4,6 +4,7 @@ from appium import webdriver
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
+import time
 
 class TestAppLaunch(unittest.TestCase):
     def setUp(self):
@@ -18,9 +19,26 @@ class TestAppLaunch(unittest.TestCase):
         
 
     def test_app_notification(self):
-        el = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "App")
-        # If element is found then assertion passes, else fails
-        self.assertIsNotNone(el, "App section should be visible after launch")
+
+        # need to naviagte the app to find notifications
+        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "App").click()
+        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Notification").click()
+        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "IncomingMessage").click()
+
+        # click on show app notification
+        self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Show App Notification").click()
+        
+        # open android notification
+        self.driver.open_notifications()
+        time.sleep(2) # wait a bit
+
+        # check to see if notification from 'Joe' is not found
+        notification = self.driver.find_element(
+            AppiumBy.ANDROID_UIAUTOMATOR,
+            'new UiSelector().textContains("Joe")'
+            )
+        
+        self.assertIsNotNone(notification, "Notification from 'Joe' not found")
 
     def tearDown(self):
         self.driver.quit()
