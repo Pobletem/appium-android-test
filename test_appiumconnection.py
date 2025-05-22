@@ -12,7 +12,7 @@ options = UiAutomator2Options().load_capabilities(desired_caps)
 
 # Connect to Appium server
 print("Connecting to Appium...")
-driver = webdriver.Remote("http://localhost:4723/wd/hub", options=options)
+driver = webdriver.Remote("http://localhost:4723", options=options)
 
 print("Connected App launched.")
 
