@@ -25,6 +25,10 @@ class TestAppLaunch(unittest.TestCase):
         self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Notification").click()
         self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "IncomingMessage").click()
 
+        # check to see if we are in the right page after navigating
+        el = self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Show App Notification")
+        self.assertIsNotNone(el, "Show App Notification section should be visible after launch")
+
         # click on show app notification
         self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Show App Notification").click()
         
