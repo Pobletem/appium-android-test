@@ -7,4 +7,3 @@ suite = loader.discover('tests')
 # run the test scripts shows the output in the terminal
 runner = unittest.TextTestRunner(verbosity=2)
 runner.run(suite)
-

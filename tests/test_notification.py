@@ -1,10 +1,10 @@
 import json
 import unittest
 from appium import webdriver
-from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
 import time
+
 
 class TestAppLaunch(unittest.TestCase):
     def setUp(self):
@@ -16,7 +16,6 @@ class TestAppLaunch(unittest.TestCase):
         options = UiAutomator2Options().load_capabilities(desired_caps)
         # launches a remote webdriver session with appium
         self.driver = webdriver.Remote("http://localhost:4723", options=options)
-        
 
     def test_app_notification(self):
 
@@ -31,21 +30,23 @@ class TestAppLaunch(unittest.TestCase):
 
         # click on show app notification
         self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Show App Notification").click()
-        
+
         # open android notification
         self.driver.open_notifications()
-        time.sleep(2) # wait a bit
+        # wait a bit
+        time.sleep(2)
 
         # check to see if notification from 'Joe' is not found
         notification = self.driver.find_element(
             AppiumBy.ANDROID_UIAUTOMATOR,
             'new UiSelector().textContains("Joe")'
             )
-        
+
         self.assertIsNotNone(notification, "Notification from 'Joe' not found")
 
     def tearDown(self):
         self.driver.quit()
+
 
 if __name__ == "__main__":
     unittest.main()
